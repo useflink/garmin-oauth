@@ -1,5 +1,5 @@
 {
-  "name": "@gitrows/flink-garmin-oauth",
+  "name": "@useflink/garmin-oauth",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
