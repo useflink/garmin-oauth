@@ -55,13 +55,11 @@ const garminAuth = {
 		};
 		headers = oauth.toHeader(oauth.authorize(request,{key:garminAuth.credentials.oauth_token,secret:garminAuth.credentials.oauth_token_secret}))
 		let result = await fetch(request.url,{method: request.method, headers: headers,}).then(r=>{status=r.status;return r.json();});
-		result?.status = status;
-		return result;
-		/*if (status && status < 400){
+		if (status && status < 400){
 			return result;
 		}
 		else
-			return null;*/
+			return null;
 	}
 
 }
