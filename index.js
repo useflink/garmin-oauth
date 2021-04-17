@@ -69,6 +69,23 @@ const garminAuth = {
 		}
 		else
 			return {status:status,message:result};
+	},
+	downloadFile : async (url, method='GET') => {
+		if (!garminAuth.credentials.oauth_token || !garminAuth.credentials.oauth_token_secret)
+			return null;
+		request = {
+			url: url,
+			method: method,
+		};
+		headers = oauth.toHeader(oauth.authorize(request,{key:garminAuth.credentials.oauth_token,secret:garminAuth.credentials.oauth_token_secret}))
+		let result = await fetch(request.url,{method: request.method, headers: headers,})
+			.then(r=>{status=r.status;return r.buffer()})
+			.catch(e=>console.log(e));
+		if (status && status < 400){
+			return result;
+		}
+		else
+			return {status:status,message:result};
 	}
 
 }
